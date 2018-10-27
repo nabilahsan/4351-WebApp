@@ -1,7 +1,6 @@
-# 4351-WebApp
-#Project for COSC 4351
-
-##Due Date: November 30, 2018 23:59:59
+# COSC 4351 Web Application Project
+## Admin Portal
+### Due Date: November 30, 2018 23:59:59
 
 Description: 
 You have been asked to build an admin portal that will allow your company internal employees to access the portal and perform admin functions on behalf of company clients.
