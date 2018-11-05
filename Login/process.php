@@ -1,9 +1,9 @@
 <?php
 // Johnny
-// $conn = mysqli_connect('localhost', 'root', 'root', 'login');
+$conn = mysqli_connect('localhost', 'root', 'root', 'login');
 
 // Nabil
-$conn = mysqli_connect('localhost', 'user2', 'Hershey@2018', 'login');
+//$conn = mysqli_connect('localhost', 'user2', 'Hershey@2018', 'login');
 
 if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
