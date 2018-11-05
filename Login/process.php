@@ -1,19 +1,41 @@
 <?php
-     $username = $_POST['username'];
-     $password = $_POST['password'];
+$conn = mysqli_connect('localhost', 'root', 'root', 'login');
 
-     $username = stripcslashes($username);
-     $password = stripcslashes($password);
+if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+}
+else {
+     echo 'connection successful<br>';
+}
 
-     echo "working";
-     // $username = mysql_real_escape_string($username);
-     // $password = mysql_real_escape_string($password);
 
-     // mysql_connect("localhost", "root", "");
-     // mysql_select_db("login");
+echo 'before query<br>';
 
-     // $result = mysql_query("select * from users where username = '$username' and password = '$password'") or die("Failed to query".mysql_error());
+$results = $conn->query("SELECT * FROM users");
+echo 'after query<br>';
 
-     // $row = mysql_fetch_array($result);
+echo $results->num_rows;
+echo 'after rows<br>';
 
+$row = $results->fetch_object();
+$records[] = $row;
+
+$results->free();
+
+
+
+
+
+
+
+//  If user is entered, true.
+if(!isset($_POST['user'])) {
+     echo 'enter user<br>';
+}
+if(!isset($_POST['pass'])) {
+     echo 'enter pass<br>';
+}
+ 
+
+echo "end of file";
 ?>
