@@ -22,8 +22,9 @@ $records[] = $row;
 
 $results->free();
 
-
-
+if ($_POST['user'] == 'admin') {
+     echo '<button>Delete</button>';
+}
 
 
 
