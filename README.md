@@ -82,7 +82,7 @@ These tasks will then be tracked throughout the sprint where the team members wi
 * Scheduling for the project will be done in the weekly scrum meeting that are part of Agile methodology. The schedule will be composed of tasks from the Scrum backlog and weekly goals that are compartmentalized to each milestone.
 
 ## Solution Architecture
-
+![alt text](/Screen%20Shot%202018-09-23%20at%205.29.35%20PM.png)
 ### Using Multi-tier: 
 Multi-tier architecture allows us to divide an application into different components that can be developed separately. It is perfect for enterprise-level application, such as the one we are working on. It includes a presentation, logic and database tier. This adds modularity and allows change and replacement in certain tiers that will not affect the other ones. 
 
