@@ -27,11 +27,7 @@ $query = "SELECT * FROM users WHERE username = '$username'";
 if ($result = $conn->query($query)) {
      //echo 'in the if<br>';
      $res = $result->fetch_assoc();
-     if ($res['username']!=$username && $res['password']!=$password) {
-          $errors = array();
-          array_push($errors, "Username is required");
-          header('Location:login.php');
-          die();
+     if ($res['username']==$username && $res['password']==$password) {
           echo 'Welcome '.$username.'<br>';
            printf('%s',$res['username'].'<br>');
      }
@@ -40,12 +36,12 @@ if ($result = $conn->query($query)) {
           if (empty($username)) {
                $errors = array();
                array_push($errors, "Username is required");
-               header('Location:login.php');
-               die();
+               //header('Location:login.php');
+              // die();
           }
 
-          header('Location:login.php');
-          die();
+          //header('Location:login.php');
+         // die();
      }
 }
 
