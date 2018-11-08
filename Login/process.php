@@ -12,36 +12,61 @@ else {
      echo 'connection successful<br>';
 }
 
-
 //  Get credentials
 $username = $_POST['user'];
 $password = $_POST['pass'];
-//echo 'username is '.$username.'<br>';
-
-
 //  Check login
 $query = "SELECT * FROM users WHERE username = '$username'";
 
 
-
 if ($result = $conn->query($query)) {
-     //echo 'in the if<br>';
-     $res = $result->fetch_assoc();
-     if ($res['username']==$username && $res['password']==$password) {
-          echo 'Welcome '.$username.'<br>';
+
+      
+      $res = $result->fetch_assoc();
+
+
+
+      if ($username == 'admin' && $password = $res['password']) {
+            
+            //  Button for admin
+            $query = "SELECT * FROM users";
+            if ($result = $conn->query($query)) {
+                 
+                  echo 'Welcome '.$username.'<br>';
+                  while ($row = $result->fetch_assoc()) {
+                        printf("%s %s %s %s", $row["id"], $row["username"], $row['password'], $row['AdminType']."<br>");
+                  }
+            }
+            echo '<button>Delete</button> ';
+            echo '<button>Edit</button> ';
+            echo '<button>Add</button><br>';
+
+      }
+
+
+      else if (empty($username) || empty($password)) {
+            header('Location:login.php');
+            die();
+     }
+     else if ($res['username']==$username && $res['password']==$password) {
+           
+           echo 'Welcome '.$username.'<br>';
            printf('%s',$res['username'].'<br>');
+
+           $type = $res['AdminType'];
+           echo 'type: '.$type.'<br>';
+           //  Check links
+           $queryLinks = "SELECT `address` FROM links WHERE LinkType == '$type'";
+           $results2 = $conn->query($queryLinks);
+           echo 'links:<br>';
+           while ($row = $result2->fetch_assoc()) {
+            printf("%s", $row['LinkType']."<br>");
+      }
      }
      else {
 
-          if (empty($username)) {
-               $errors = array();
-               array_push($errors, "Username is required");
-               //header('Location:login.php');
-              // die();
-          }
-
-          //header('Location:login.php');
-         // die();
+          header('Location:login.php');
+          die();
      }
 }
 
@@ -64,33 +89,25 @@ if ($result = $conn->query($query)) {
 //      echo "error inserting<br>";
 // }
 
+
+//  Show users.
+// $query = "SELECT * FROM users";
+// if ($result = $conn->query($query)) {
+     
+//      while ($row = $result->fetch_assoc()) {
+//           printf("%s %s %s %s", $row["id"], $row["username"], $row['password'], $row['AdminType']."<br>");
+//      }
+// }
+
+
+
+
+echo "end of file";
+
+// Initial Quesry Attempt
 // $results = $conn->query("SELECT * FROM users");
 // echo 'number of rows: '.$results->num_rows.'<br>';
 // $row = $results->fetch_object();
 // $records[] = $row;
 // $results->free();
-//  Show users.
-$query = "SELECT * FROM users";
-if ($result = $conn->query($query)) {
-     
-     while ($row = $result->fetch_assoc()) {
-          printf("%s %s %s %s", $row["id"], $row["username"], $row['password'], $row['AdminType']."<br>");
-     }
-}
-
-
-//  Button for admin
-if ($_POST['user'] == 'admin') {
-     echo '<button>Delete</button><br>';
-}
-
-//  If user is entered, true.
-if(!isset($_POST['user'])) {
-     echo 'enter user<br>';
-}
-if(!isset($_POST['pass'])) {
-     echo 'enter pass<br>';
-}
-
-echo "end of file";
 ?>
