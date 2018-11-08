@@ -1,5 +1,4 @@
 <?php 
-          echo 'Invalid Entry<br>';
-
-
+     //  Fix erorr reporting.
+     //  If user is entered, true.
 ?>
