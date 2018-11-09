@@ -40,7 +40,7 @@ if ($result = $conn->query($query)) {
             echo '<button>Delete</button> ';
             echo '<button>Edit</button> ';
             echo '<button>Add</button><br>';
-
+            $result->free();
       }
 
 
@@ -51,17 +51,33 @@ if ($result = $conn->query($query)) {
      else if ($res['username']==$username && $res['password']==$password) {
            
            echo 'Welcome '.$username.'<br>';
-           printf('%s',$res['username'].'<br>');
+           //printf('%s',$res['username'].'<br>');
 
            $type = $res['AdminType'];
-           echo 'type: '.$type.'<br>';
+           //echo 'type: '.$type.'<br>';
+
+
+            $query2 = "SELECT * FROM links WHERE LinkType = $type";
+            $results = $conn->query($query2);
+            // if($results = $conn->query($query2)){
+            //       echo "conn->query done<br>";
+            // }
+            while($res = $results->fetch_assoc()){
+
+                  printf("%s", $res['address'].'<br>');
+            }
+            
+
+
            //  Check links
-           $queryLinks = "SELECT `address` FROM links WHERE LinkType == '$type'";
-           $results2 = $conn->query($queryLinks);
-           echo 'links:<br>';
-           while ($row = $result2->fetch_assoc()) {
-            printf("%s", $row['LinkType']."<br>");
-      }
+      //      $queryLinks = "SELECT 'address' FROM links WHERE LinkType = '3'";
+      //      $results2 = $conn->query($queryLinks);
+      //      echo 'links:<br>';
+      //      $res2 = $results2->fetch_assoc();
+      //      printf("%s", $res2["id"]);
+      //      while ($row = $result2->fetch_assoc()) {
+      //       printf("%s", $row['LinkType']."<br>");
+      // }
      }
      else {
 
@@ -102,7 +118,7 @@ if ($result = $conn->query($query)) {
 
 
 
-echo "end of file";
+//echo "end of file";
 
 // Initial Quesry Attempt
 // $results = $conn->query("SELECT * FROM users");
