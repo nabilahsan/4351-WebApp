@@ -97,7 +97,7 @@ if ($result = $conn->query($query)) {
             // }
             while($res = $results->fetch_assoc()) {
 
-                  printf("%s", $res['address'].'<br>');
+                  printf("%s",'<a href = "'.$res['address'].'" >'.$res['address'].'</a>'.'<br>');
             }
             
 
