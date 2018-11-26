@@ -1,9 +1,10 @@
 <?php
+session_start();
 // Johnny
-//$conn = new mysqli('localhost', 'root', 'root', 'login');
+$conn = new mysqli('localhost', 'root', 'root', 'login');
 
 // Nabil
-$conn = mysqli_connect('localhost', 'user2', 'Hershey@2018', 'login');
+//$conn = mysqli_connect('localhost', 'user2', 'Hershey@2018', 'login');
 
 
 //  DB connection check.
@@ -16,8 +17,15 @@ else {
 
 
 //  Get credentials
-$username = $_POST['user'];
-$password = $_POST['pass'];
+$_SESSION['usern'] = $_POST['user'];
+$_SESSION['passw'] = $_POST['pass'];
+
+$username = $_SESSION['usern'];
+$password = $_SESSION['passw'];
+
+echo $username."<br>";
+echo $password."<br>";
+
 //  Login SQL
 $query = "SELECT * FROM users WHERE username = '$username'";
 
@@ -52,30 +60,44 @@ if ($result = $conn->query($query)) {
                   printf("%s %s %s", $res['id'], $res['address'], $res['LinkType'].'<br>');
             }
 
-            //  Delete form and button
-            $results = $conn->query($query2);
-            ?>
-            <form action="process.php">
-            <select>
-            <?php
-                  while($res = $results->fetch_assoc()) {
 
-                  ?>
-                  <option value=" <?php $res['id'] ?> "> <?php echo $res['address'] ?> </option>
-                  <?php
-                        
-                        // printf("%s %s %s", $res['id'], $res['address'], $res['LinkType'].'<br>');
-                  }            
+
+      //  Delete a user.
+      // $query = "DELETE FROM users WHERE username='Jane'";
+      // if ($conn->query($query)) {
+      //      echo "Success deletion<br>";
+      // }else {
+      //      echo "did not delete<br>";
+      // }
+            //  Delete Link form and button
             ?>
-            </select>
+
+            <form action="process.php" method="POST">
+                  <td><input type="text" name="deleteLink"></td>
+                  <input type="submit" name="Remove" value="Remove"/>
             </form>
+
             <?php
-            
-            // Html form? when clicked, do action, return to process.php
-            //  Buttons, no function yet.
-            echo '<button>Delete</button> ';
-            echo '<button>Edit</button> ';
-            echo '<button>Add</button><br>';
+
+            if (isset($_POST['deleteLink'])) {
+
+                  echo "Going to remove: ".$_POST['deleteLink']."<br>";
+            }
+
+
+
+            //  Add Link form button
+
+
+
+            //  Edit Link form button.
+
+
+
+
+            // echo '<button>Delete</button> ';
+            // echo '<button>Edit</button> ';
+            // echo '<button>Add</button><br>';
             $result->free();
       }
 

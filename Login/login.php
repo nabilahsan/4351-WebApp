@@ -7,7 +7,6 @@
 </head>
 <body>
    <div id="frm">
-       <?php include('errors.php'); ?>
        <form action="process.php" method="POST">
     		<p>
                <label>Username:</label>
